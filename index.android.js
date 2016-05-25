@@ -1,7 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 
 import React, { Component } from 'react';
 import {
@@ -11,6 +7,7 @@ import {
   View
 } from 'react-native';
 import Main from './app/Main';
+
 class awsomeShowcase extends Component {
   render() {
     return (
