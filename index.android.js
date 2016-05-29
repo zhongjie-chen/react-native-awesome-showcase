@@ -6,12 +6,12 @@ import {
   Text,
   View
 } from 'react-native';
-import Main from './app/Main';
+import App from './app/Home';
 
 class awsomeShowcase extends Component {
   render() {
     return (
-      <Main></Main>
+      <App></App>
     );
   }
 }

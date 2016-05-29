@@ -20,13 +20,15 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fadeAnim:new Animated.Value(0)
+      fadeAnim:new Animated.Value(1)
     }
     this.currentY = 0;
   }
   _onHomeClick(){
-    console.log(this);
-    console.log(this._input.props.style);
+    Animated.timing(          // Uses easing functions
+       this.state.fadeAnim,    // The value to drive
+       {toValue: 0},           // Configuration
+     ).start();
   }
 
   componentWillMount(){
@@ -36,18 +38,23 @@ class Main extends React.Component {
         let sgs = new SimpleGesture(e,gs);
         console.log('isSwipeUp ', sgs.isSwipeUp());
         console.log('isSwipeRight() ', sgs.isSwipeRight());
+        if(sgs.isSwipeUp()){
+          Animated.timing(          // Uses easing functions
+             this.state.fadeAnim,    // The value to drive
+             {toValue: 0},           // Configuration
+           ).start();
+        } else {
+          Animated.timing(          // Uses easing functions
+             this.state.fadeAnim,    // The value to drive
+             {toValue: 1},           // Configuration
+           ).start();
+        }
         return sgs.isSwipeUp();
       }
     });
   }
 
   render() {
-    setInterval(()=>{
-        Animated.timing(          // Uses easing functions
-           this.state.fadeAnim,    // The value to drive
-           {toValue: 0},           // Configuration
-         ).start();
-      },1000);
     return(
       <View
         style={styles.container}
@@ -56,9 +63,9 @@ class Main extends React.Component {
           style={styles.container}
           tabBarPosition="bottom"  >
           <View style={{flex: 1}} tabLabel='iOS'>
-            <Animated.View style={{backgroundColor: 'red', height: this.state.fadeAnim.interpolate({
+            <Animated.View style={{backgroundColor: 'red', height: 100, marginTop: this.state.fadeAnim.interpolate({
               inputRange:[0,1],
-              outputRange:[10,30]
+              outputRange:[-100,0]
             })}} ></Animated.View>
             <ScrollView
               style={{flex: 1}}
